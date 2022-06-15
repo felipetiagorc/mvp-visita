@@ -1,27 +1,28 @@
 import type { NextPage } from 'next';
-import { getSession, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+// import useRequiredAuth from '../lib/useRequiredAuth';
 import styles from '../styles/Home.module.css';
 
-// //validar isso e redirecionar para a tela de login - ( Pelo Server Side)
+// validar isso e redirecionar para a tela de login - ( Pelo Server Side)
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context);
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//         permanent: false
+//       }
+//     };
+//   }
+//   return {
+//     props: {
+//       session
+//     }
+//   };
+// }
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    };
-  }
-  return {
-    props: {
-      session
-    }
-  };
-}
 const Home: NextPage = () => {
   // esse hook pega a session do provider q está envolvendo toda aplicao
   const { data: session } = useSession();

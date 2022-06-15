@@ -1,10 +1,13 @@
 import { getSession, signIn } from 'next-auth/react';
 
+//validação sem next.router.push()
+//ao inves, faz no server:
 export async function getServerSideProps(context) {
   // aqui eu poderia receber a req e c/ req.cookie ver se ta autenticado
   // e redirecionar pra outra tela.. mas o next-auth tem o metodo 'getSession'
   const session = await getSession(context);
 
+  // se ja ta logado vai pra tela inicial
   if (session) {
     return {
       redirect: {
