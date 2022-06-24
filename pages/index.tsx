@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import NavMenu from '../components/menu';
 // import useRequiredAuth from '../lib/useRequiredAuth';
 import styles from '../styles/Home.module.css';
 
@@ -31,6 +32,8 @@ const Home: NextPage = () => {
   // const session = useRequiredAuth();
   // if (!session) return <div>Loading...</div>;
   return (
+    <>
+    <NavMenu user={session?.user}/>
     <div className={styles.container}>
       <div className='mt-4 items-center'>
         {session?.user?.image && (
@@ -45,6 +48,7 @@ const Home: NextPage = () => {
       <h1>{`Seja bem vindo ${session?.user?.name}`}</h1>
       <button onClick={() => signOut()}>Sair</button>
     </div>
+    </>
   );
 };
 

@@ -40,14 +40,17 @@ export const authOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
+
   // esse é o callback do next-auth pra fazer algo após login:
+  // isso q pode ta me atrapalhando no useSession ? 
   callbacks: {
     session: ({ session, user }) => ({
       ...session,
       user: {
         ...session.user,
         id: user.id,
-        username: user.username
+        username: user.username,
+        image: user.image
       }
     })
   }
