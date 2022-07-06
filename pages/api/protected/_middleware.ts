@@ -9,7 +9,7 @@
 
 import { getSession } from 'next-auth/react';
 import { NextRequest, NextResponse } from 'next/server';
-import parseUrl from '../lib/parseUrl';
+import parseUrl from '../../../lib/parseUrl';
 
 async function handle(req: NextRequest, res: NextResponse) {
   const signInPage = '/login';

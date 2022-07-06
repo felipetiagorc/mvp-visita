@@ -1,12 +1,14 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false }
+  { name: 'Inicio', href: '/', current: true },
+  { name: 'Documentos', href: '#', current: false },
+  { name: 'Unidades', href: '#', current: false }
 ];
 
 function classNames(...classes) {
@@ -14,6 +16,8 @@ function classNames(...classes) {
 }
 
 export default function NavMenu(user) {
+  const { data: session } = useSession();
+
   return (
     <Disclosure as='nav' className='bg-gray-800'>
       {({ open }) => (
@@ -34,14 +38,14 @@ export default function NavMenu(user) {
               <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
                 <div className='flex-shrink-0 flex items-center'>
                   <img
-                    className='block lg:hidden h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
-                    alt='Workflow'
+                    className='block lg:hidden h-10 w-auto'
+                    src='https://upload.wikimedia.org/wikipedia/commons/1/1a/Bras%C3%A3o_do_estado_de_S%C3%A3o_Paulo.svg'
+                    alt='BrasaoSP'
                   />
                   <img
-                    className='hidden lg:block h-8 w-auto'
+                    className='hidden lg:block h-10 w-auto'
                     src='https://upload.wikimedia.org/wikipedia/commons/1/1a/Bras%C3%A3o_do_estado_de_S%C3%A3o_Paulo.svg'
-                    alt='Workflow'
+                    alt='BrasaoSP'
                   />
                 </div>
                 <div className='hidden sm:block sm:ml-6'>
@@ -77,16 +81,17 @@ export default function NavMenu(user) {
                   <div>
                     <Menu.Button className='bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                       <span className='sr-only'>Open user menu</span>
-                      <img className='h-8 w-8 rounded-full'>
-                        {user?.image && (
+                      <div className='h-10 w-10'>
+                        {session?.user?.image && (
                           <Image
-                            src={user.image}
+                            className='rounded-full'
+                            src={session.user.image}
                             alt='user'
-                            width='50px'
-                            height='50px'
+                            width='88px'
+                            height='88px'
                           />
                         )}
-                      </img>
+                      </div>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -108,7 +113,7 @@ export default function NavMenu(user) {
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
-                            Your Profile
+                            Meu Perfil
                           </a>
                         )}
                       </Menu.Item>
@@ -121,20 +126,21 @@ export default function NavMenu(user) {
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
-                            Settings
+                            Preferências
                           </a>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <a
+                            onClick={() => signOut()}
                             href='#'
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
-                            Sign out
+                            Sair
                           </a>
                         )}
                       </Menu.Item>
