@@ -2,8 +2,11 @@ function Inicial(props) {
   return (
     <div className='container flex flex-col items-center justify-center min-h-screen p-10 px-0 mx-auto md:py-10 md:p-10 md:px-0'>
       <h1 className='font-bold text-center text-4xl'>
-        Bem vindo a <span className='text-blue-500'>SAP</span>
-        {props.user ? `${props.user}` : ' visitante!'}
+        Bem vindo a SAP
+        <span className='text-blue-500'>
+          {' '}
+          {props.user ? ` ${props.user}` : ' visitante!'}
+        </span>
       </h1>
 
       <h3 className='items-center mb-12 mt-12 text-3xl'>Escolha uma opção:</h3>
@@ -12,9 +15,8 @@ function Inicial(props) {
         <section className='bg-blue-500 h-full max-h-72 transform group border-2 border-neutral-800 rounded-2xl duration-300 hover:scale-105 hover:border-blue-600 hover:-translate-y-1 hover:shadow-2xl'>
           <a href='https://nextjs.org/' target='_blank' rel='noreferrer'>
             <div className='p-5 py-10 flex flex-col justify-center h-full text-center text-white'>
-              <h2 className='mb-5 text-3xl'>Acesso Restrito</h2>
-              <p className='mb-5'>Fazer Login: </p>
-              <p className='mb-5'>- Aqui terio o form- </p>
+              <h2 className='mb-5 text-3xl'>Envio de Documentos</h2>
+              <p className='mb-5'>Necessário fazer Login</p>
               <button className='p-2 px-6 w-fit self-center text-blue-500 font-bold bg-blue-50 rounded-full group-hover:bg-blue-50 duration-300'>
                 Entrar
               </button>
