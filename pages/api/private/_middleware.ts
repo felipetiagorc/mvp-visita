@@ -11,7 +11,7 @@ import { getSession } from 'next-auth/react';
 import { NextRequest, NextResponse } from 'next/server';
 import parseUrl from '../../../lib/parseUrl';
 
-async function handle(req: NextRequest, res: NextResponse) {
+async function handle(req: NextRequest) {
   const signInPage = '/login';
   const errorPage = '/login';
   const basePath = parseUrl(process.env.NEXTAUTH_URL).path;
@@ -25,8 +25,8 @@ async function handle(req: NextRequest, res: NextResponse) {
 
   const requestForNextAuth: any = {
     headers: {
-      cookie: req.headers.get('cookie')
-    }
+      cookie: req.headers.get('cookie'),
+    },
   };
 
   const session = await getSession({ req: requestForNextAuth });
