@@ -1,0 +1,42 @@
+{
+    
+    "visitas": [
+    {
+        "id": 1,
+        "nome": "Argelia da Silva",
+        "cpf": "31786858858",
+        "parentesco": "irmã"
+    },
+    {
+        "id": 2,
+        "nome": "Arlequina da Conceicao",
+        "cpf": "2914884966",
+        "parentesco": "amásia"
+    }
+],
+
+ 
+"presos": [
+    {
+        "id": 1,
+        "nome": "Agenor Santos",
+        "cpf": "44499988875",
+        "rol": [
+            {
+                
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nome": "Arlequina da Conceicao",
+        "cpf": "2914884966",
+        "parentesco": "amásia"
+    }
+]
+
+
+
+
+
+}
