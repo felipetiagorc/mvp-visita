@@ -11,9 +11,7 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "14"
-  },
+
   "dependencies": {
     "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
