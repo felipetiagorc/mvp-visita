@@ -14,10 +14,10 @@ export const authOptions = {
           name: profile.name || profile.login,
           username: profile.login,
           email: profile.email,
-          image: profile.avatar_url
+          image: profile.avatar_url,
         };
-      }
-    })
+      },
+    }),
     // ...add more providers here
 
     /* Exemplo de integração com API própria de login:
@@ -42,18 +42,36 @@ export const authOptions = {
   adapter: PrismaAdapter(prisma),
 
   // esse é o callback do next-auth pra fazer algo após login:
-  // isso q pode ta me atrapalhando no useSession ? 
+  // isso q pode ta me atrapalhando no useSession ?
+
+  // novo jeito nextAuth v4 =
+
+  /**
+ *   ...
+callbacks: {
+    jwt: async ({ token, user }) => {
+        user && (token.user = user)
+        return token
+    },
+    session: async ({ session, token }) => {
+        session.user = token.user
+        return session
+    }
+}
+...
+
+ */
   callbacks: {
-    session: ({ session, user }) => ({
+    session: async ({ session, user }) => ({
       ...session,
       user: {
         ...session.user,
         id: user.id,
         username: user.username,
-        image: user.image
-      }
-    })
-  }
+        image: user.image,
+      },
+    }),
+  },
 };
 
 export default NextAuth(authOptions);

@@ -33,23 +33,7 @@ const Home: NextPage = () => {
   return (
     <>
       <NavMenu />
-
-      {/* <div className={styles.container}>
-        <div className='mt-4 items-center'>
-          {session?.user?.image && (
-            <Image
-              src={session.user.image}
-              alt='user'
-              width='88px'
-              height='88px'
-            />
-          )}
-        </div>
-        <h1>{`Seja bem vindo ${session?.user?.name}`}</h1>
-        <button onClick={() => signOut()}>Sair</button>
-      </div> */}
-
-      <Inicial user={session?.user?.name} />
+      {session?.user?.name ? null : <Inicial user={session?.user?.name} />}
     </>
   );
 };
