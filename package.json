@@ -1,15 +1,17 @@
 {
-  "name": "next-auth-nhimi",
+  "name": "mvp-visita-fe",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "16"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
