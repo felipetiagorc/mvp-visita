@@ -8,7 +8,7 @@ import createEmotionCache from '../utils/createEmotionCache';
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
 
-export type NextPageWithLayout = NextPage & {
+type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
   getLayout?: (page: ReactElement) => ReactNode;
 };
