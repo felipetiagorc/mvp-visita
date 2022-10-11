@@ -18,7 +18,11 @@ export const authOptions = {
         };
       },
     }),
+<<<<<<< HEAD
     // outros provedores aqui
+=======
+    // ...add more providers here
+>>>>>>> 37b98bd20125b80c3db77ad839f7bcc9fcfc0fea
 
     /* Exemplo de integração com API própria de login:
    , CredentialsProvider({
@@ -43,8 +47,31 @@ export const authOptions = {
 
   // esse é o callback do next-auth pra fazer algo após login:
   // isso q pode ta me atrapalhando no useSession ?
+<<<<<<< HEAD
   callbacks: {
     session: ({ session, user }) => ({
+=======
+
+  // novo jeito nextAuth v4 =
+
+  /**
+ *   ...
+callbacks: {
+    jwt: async ({ token, user }) => {
+        user && (token.user = user)
+        return token
+    },
+    session: async ({ session, token }) => {
+        session.user = token.user
+        return session
+    }
+}
+...
+
+ */
+  callbacks: {
+    session: async ({ session, user }) => ({
+>>>>>>> 37b98bd20125b80c3db77ad839f7bcc9fcfc0fea
       ...session,
       user: {
         ...session.user,
