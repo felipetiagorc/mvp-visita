@@ -1,17 +1,18 @@
-module.exports = {
-  content: [
-    './pages/**/*.{js, ts, tsx, html}',
-    './pages/**/*.js',
-    './pages/**/*.ts',
-    './pages/**/*.tsx',
-    './pages/**/*.jsx',
-    './pages/**/*.html',
+// import konstaConfig config
+const konstaConfig = require('konsta/config');
 
-    './components/**/*.{js, ts, tsx, html}',
-    './components/**/*.tsx'
+// wrap config with konstaConfig config
+module.exports = konstaConfig({
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
+  darkMode: 'media', // or 'class'
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: []
-};
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+});

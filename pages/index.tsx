@@ -33,7 +33,7 @@ const Home: NextPage = () => {
   return (
     <>
       <NavMenu />
-      {session?.user?.name ? null : <Inicial user={session?.user?.name} />}
+      <Inicial user={session?.user?.name} />
     </>
   );
 };
