@@ -7,7 +7,6 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from '../utils/createEmotionCache';
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
-import { App } from 'konsta/react';
 
 type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -38,15 +37,14 @@ function MyApp({
     //     pageProps: { session, ...pageProps },
     //   } = props;
     // return (
-    <App theme="ios">
-      <SessionProvider session={session}>
-        <CacheProvider value={emotionCache}>
-          <PublicLayout>
-            <Component {...pageProps} />
-          </PublicLayout>
-        </CacheProvider>
-      </SessionProvider>
-    </App>
+
+    <SessionProvider session={session}>
+      <CacheProvider value={emotionCache}>
+        <PublicLayout>
+          <Component {...pageProps} />
+        </PublicLayout>
+      </CacheProvider>
+    </SessionProvider>
   );
 }
 
