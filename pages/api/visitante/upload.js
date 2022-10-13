@@ -1,20 +1,10 @@
-import { prisma } from './../../../lib/prisma';
+import nc from 'next-connect';
+import upload from './src/utils/upload';
 
-export default function handler(req, res) {
-  const { method } = req;
-
-  switch (method) {
-    case 'GET':
-      //   res.status(200).json({ id, nome: `User ${id}` });
-      res.status(200).json({ msg: method });
-      break;
-
-    case 'PUT':
-      res.status(200).json({ msg: method });
-      //   res.status(200).json({ id, nome: nome || `User ${id}` });
-      break;
-    default:
-      res.setHeader('Allow', ['GET', 'PUT']);
-      res.status(405).end(`Method ${method} nao permitido`);
-  }
-}
+export const handler = nc()
+  .use(upload.single('file'))
+  .post((req, res) => {
+    const { title, authorName, authorAvatar, imagemUrl } = req.body;
+    const {db} = await conn
+    res.json({});
+  });
