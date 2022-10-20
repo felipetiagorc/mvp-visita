@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "sourceMap": true, //nao tinha
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

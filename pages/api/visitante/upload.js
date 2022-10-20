@@ -9,32 +9,48 @@ const handler = nc()
   .post(async (req, res) => {
     const { email } = req.body;
 
-    const usuario = await prisma.user.findFirst({
-      where: { email: email },
-      select: {
-        Documento: true,
-      },
-    });
+    console.log(req.file);
+    console.log(req.file.location);
+    // const doc = await prisma.documento.create({
+    //   data: {
+    //     nomeDoc: 'RG',
+    //     dataExpira: '2022-03-19T14:21:00+02:00',
+    //     validado: false,
+    //     caminho: req.file.location,
+    //   },
+    // });
 
     await prisma.user.update({
-      where: {
-        email: email,
-      },
-
-      //Argument data.Documento.set of type DocumentoWhereUniqueInput needs exactly one argument, but you provided 0 and 1 and 2 and 3
-      // falta um select aqui ? ou parar de usar Document...
-
+      where: { email: email },
       data: {
-        Documento: {
-          set: [...usuario.Documento, req.file.location],
+        documentos: {
+          create: {
+            nomeDoc: 'cpf',
+            dataExpira: new Date('2022-03-19'),
+            validado: false,
+            caminho: req.file.location,
+          },
         },
       },
     });
+
     return res.status(200).json({ ok: true });
+  })
+  .get(async (req, res) => {
+    const docId = req.query.docId;
+    const result = await prisma.documento.findMany({
+      where: {
+        userId: docId,
+      },
+    });
+    res.json(result);
   });
 
 export const config = {
   api: {
+    // sem o 'bodyparser: false':
+    // não consegue passar file + algo no req.body (eu acho)
+    // ou não consegue acessar o req. e o body na resposta
     bodyParser: false,
   },
 };
