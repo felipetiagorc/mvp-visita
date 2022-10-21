@@ -8,18 +8,6 @@ const handler = nc()
   .use(upload.single('file'))
   .post(async (req, res) => {
     const { email } = req.body;
-
-    console.log(req.file);
-    console.log(req.file.location);
-    // const doc = await prisma.documento.create({
-    //   data: {
-    //     nomeDoc: 'RG',
-    //     dataExpira: '2022-03-19T14:21:00+02:00',
-    //     validado: false,
-    //     caminho: req.file.location,
-    //   },
-    // });
-
     await prisma.user.update({
       where: { email: email },
       data: {
@@ -37,10 +25,10 @@ const handler = nc()
     return res.status(200).json({ ok: true });
   })
   .get(async (req, res) => {
-    const docId = req.query.docId;
+    const userId = req.query.userId;
     const result = await prisma.documento.findMany({
       where: {
-        userId: docId,
+        userId,
       },
     });
     res.json(result);

@@ -8,8 +8,12 @@ import Brasao from './../public/brasao-sp-eleicao.png';
 
 const navigation = [
   { name: 'Inicio', href: '/', current: true },
-  { name: 'Documentos', href: '#', current: false },
-  { name: 'Unidades', href: '#', current: false },
+  { name: 'Documentos', href: '/upload', current: false },
+  {
+    name: 'Unidades',
+    href: 'http://www.sap.sp.gov.br/uni-prisionais/pen.html',
+    current: false,
+  },
 ];
 
 function classNames(...classes) {

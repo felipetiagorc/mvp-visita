@@ -1,23 +1,12 @@
-import { Card, CardContent, Grid } from '@mui/material';
-import { Form, Formik } from 'formik';
-import { MultipleUploadField } from './multipleFileUpField';
+import { NextPage } from 'next';
+import UploadForm from '../../components/UploadForm';
 
-export default function Upload() {
+const Upload: NextPage = () => {
   return (
-    <Card>
-      <CardContent>
-        <Formik initialValues={{}} onSubmit={() => {}}>
-          {({ values, errors }) => {
-            <Form>
-              <Grid container spacing={2} direction="column">
-                <MultipleUploadField />
-              </Grid>
-
-              <pre>{JSON.stringify({ values, errors })}</pre>
-            </Form>;
-          }}
-        </Formik>
-      </CardContent>
-    </Card>
+    <>
+      <UploadForm />
+    </>
   );
-}
+};
+
+export default Upload;

@@ -7,6 +7,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from '../utils/createEmotionCache';
 import { NextPage } from 'next';
 import { ReactElement, ReactNode } from 'react';
+import Menu from '../components/menu';
 
 type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -28,20 +29,28 @@ function MyApp({
   pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-  return getLayout(
-    // const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
-    //   const {
-    //     Component,
-    //     emotionCache = clientSideEmotionCache,
-    //     pageProps: { session, ...pageProps },
-    //   } = props;
-    // return (
-
+  const Layout = ({ Component, pageProps }) => {
+    if (Component.getLayout) {
+      return Component.getLayout(<Component {...pageProps} />);
+    } else {
+      return <Component {...pageProps} />;
+    }
+  };
+  // const getLayout = Component.getLayout ? ((page) => page) :
+  // getLayout(
+  //   const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
+  //     const {
+  //       Component,
+  //       emotionCache = clientSideEmotionCache,
+  //       pageProps: { session, ...pageProps },
+  //     } = props;
+  return (
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
         <PublicLayout>
-          <Component {...pageProps} />
+          <Menu />
+          {/* <Component {...pageProps} /> */}
+          <Layout Component={Component} pageProps={pageProps} />
         </PublicLayout>
       </CacheProvider>
     </SessionProvider>
