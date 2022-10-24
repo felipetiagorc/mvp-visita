@@ -29,13 +29,6 @@ function MyApp({
   pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache,
 }: MyAppProps) {
-  const Layout = ({ Component, pageProps }) => {
-    if (Component.getLayout) {
-      return Component.getLayout(<Component {...pageProps} />);
-    } else {
-      return <Component {...pageProps} />;
-    }
-  };
   // const getLayout = Component.getLayout ? ((page) => page) :
   // getLayout(
   //   const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
@@ -47,14 +40,20 @@ function MyApp({
   return (
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
-        <PublicLayout>
-          <Menu />
-          {/* <Component {...pageProps} /> */}
-          <Layout Component={Component} pageProps={pageProps} />
-        </PublicLayout>
+        <Menu />
+        {/* <Component {...pageProps} /> */}
+        <Layout Component={Component} pageProps={pageProps} />
       </CacheProvider>
     </SessionProvider>
   );
 }
+
+const Layout = ({ Component, pageProps }) => {
+  if (Component.getLayout) {
+    return Component.getLayout(<Component {...pageProps} />);
+  } else {
+    return <Component {...pageProps} />;
+  }
+};
 
 export default MyApp;
