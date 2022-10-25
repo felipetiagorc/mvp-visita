@@ -1,12 +1,13 @@
-import { NextPage } from 'next';
+import Header from 'components/Header';
 import UploadForm from '../../components/UploadForm';
 
-const Upload: NextPage = () => {
+export default function Upload() {
   return (
     <>
       <UploadForm />
     </>
   );
+}
+Upload.getLayout = function getLayout(page) {
+  return <Header>{page}</Header>;
 };
-
-export default Upload;

@@ -40,8 +40,6 @@ function MyApp({
   return (
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
-        <Menu />
-        {/* <Component {...pageProps} /> */}
         <Layout Component={Component} pageProps={pageProps} />
       </CacheProvider>
     </SessionProvider>

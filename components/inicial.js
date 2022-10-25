@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-function Inicial(props) {
+export default function Inicial(props) {
   return (
     <div className="container flex flex-col items-center justify-center min-h-screen p-10 px-10 mx-auto md:py-10 md:p-10 md:px-10">
       <h1 className="font-bold text-center text-4xl">
@@ -43,25 +43,6 @@ function Inicial(props) {
         </section>
 
         <section className="h-full max-h-72 transform group border-2 border-neutral-800 rounded-2xl duration-300 hover:scale-105 hover:border-blue-600 hover:-translate-y-1 hover:shadow-2xl">
-          <a
-            href="http://www.sap.sp.gov.br/sap-dados/publicacoes-legislacoes.html"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className="p-5 py-10 flex flex-col justify-center h-full text-center">
-              <h2 className="mb-5 text-3xl">Legislação</h2>
-              <p className="mb-5">Resoluções e Portarias vigentes</p>
-
-              <h2 className="mb-5 text-3xl">Unidades Prisionais</h2>
-              <p className="mb-5">Relação de Unidades</p>
-              <button className="p-2 px-6 w-fit self-center text-white font-bold bg-blue-500 rounded-full group-hover:bg-blue-600 duration-300">
-                Ver
-              </button>
-            </div>
-          </a>
-        </section>
-
-        <section className="h-full max-h-72 transform group border-2 border-neutral-800 rounded-2xl duration-300 hover:scale-105 hover:border-blue-600 hover:-translate-y-1 hover:shadow-2xl">
           <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
             <div className="p-5 py-10 flex flex-col justify-center h-full text-center">
               <h2 className="mb-5 text-3xl">Legislação</h2>
@@ -81,4 +62,3 @@ function Inicial(props) {
     </div>
   );
 }
-export default Inicial;
