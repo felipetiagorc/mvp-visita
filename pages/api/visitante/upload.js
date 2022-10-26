@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const handler = nc()
   .use(upload.single('file'))
   .post(async (req, res) => {
-    const { email } = req.body;
+    const { email } = req.params;
     await prisma.user.update({
       where: { email: email },
       data: {
