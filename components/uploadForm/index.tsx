@@ -1,5 +1,8 @@
 // continuar daquiu
 
+import { AxiosRequestConfig } from 'axios';
+import { MouseEvent, useState, useEffect } from 'react';
+
 // https://codersteps.com/articles/how-to-build-a-file-uploader-with-next-js-and-formidable
 
 const imageMimeType = /image\/(png|jpg|jpeg)/i;

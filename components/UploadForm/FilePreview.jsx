@@ -7,7 +7,7 @@ const FilePreview = ({ fileDataURL }) => {
   return (
     <>
       <p className="flex justify-center">
-        <img className="h-30 w-30" src={fileDataURL} alt="preview" />
+        <img className="h-20 w-20" src={fileDataURL} alt="preview" />
       </p>
     </>
   );

@@ -1,5 +1,4 @@
 import Header from 'components/Header';
-import UploadForm from 'components/uploadForm';
 import axios, { AxiosRequestConfig } from 'axios';
 import { NextPage } from 'next';
 import {
@@ -10,9 +9,9 @@ import {
   useState,
 } from 'react';
 
-import Form from 'components/uploadForm/Form';
-import Toogle from 'components/uploadForm/Toogle';
-import ProgressBar from 'components/uploadForm/ProgressBar';
+import Form from 'components/UploadForm/Form';
+import Toogle from 'components/UploadForm/Toogle';
+import ProgressBar from 'components/UploadForm/ProgressBar';
 
 type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -30,12 +29,12 @@ const Upload: NextPageWithLayout = () => {
     const fileInput = e.target;
 
     if (!fileInput.files) {
-      alert('No file was chosen');
+      alert('Nenhum arquivo escolhido');
       return;
     }
 
     if (!fileInput.files || fileInput.files.length === 0) {
-      alert('Files list is empty');
+      alert('Lista de arquivos vazia');
       return;
     }
 
@@ -43,7 +42,7 @@ const Upload: NextPageWithLayout = () => {
 
     /** File validation */
     if (!file.type.startsWith('image')) {
-      alert('Please select a valide image');
+      alert('Selecione um arquivo de imagem');
       return;
     }
 
@@ -68,7 +67,7 @@ const Upload: NextPageWithLayout = () => {
   const changeHandler = (e) => {
     const file = e.target.files[0];
     if (!file.type.match(imageMimeType)) {
-      alert('Image mime type is not valid');
+      alert('O formato da imagem não é válido');
       return;
     }
     setFile(file);
