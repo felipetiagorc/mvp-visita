@@ -1,9 +1,12 @@
 {
   "liveServer.settings.port": 5501,
-  "cSpell.words": ["brasao", "eleicao"],
+  "cSpell.words": [
+    "brasao",
+    "eleicao"
+  ],
   "workbench.colorCustomizations": {
-    "activityBar.background": "#0b5450",
-    "titleBar.activeBackground": "#15b1a4",
+    "activityBar.background": "#540B4F",
+    "titleBar.activeBackground": "#760F6E",
     "titleBar.activeForeground": "#FEFBFE"
   }
 }
