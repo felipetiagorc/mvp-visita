@@ -1,13 +1,27 @@
 import nc from 'next-connect';
-import upload from './../../../utils/upload';
+import uploadMulterS3 from 'utils/uploadMulterS3';
 
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-const handler = nc()
-  .use(upload.single('file'))
+const handler = nc({
+  onError(error, req, res) {
+    res
+      .status(501)
+      .json({ error: `Sorry something Happened! ${error.message}` });
+  },
+
+  onNoMatch(req, res) {
+    res
+      .statusCode(405)
+      .json({ error: `Método '${req.method}' não permitido!` });
+  },
+})
+  .use(uploadMulterS3.single('file'))
+
   .post(async (req, res) => {
-    const { email } = req.params;
+    const { email } = req.body;
+
     await prisma.user.update({
       where: { email: email },
       data: {
@@ -22,7 +36,7 @@ const handler = nc()
       },
     });
 
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ message: 'ok' });
   })
   .get(async (req, res) => {
     const userId = req.query.userId;

@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Documento" ALTER COLUMN "dataExpira" SET DATA TYPE DATE,
-ALTER COLUMN "createdAt" SET DATA TYPE DATE;

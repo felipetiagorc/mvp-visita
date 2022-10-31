@@ -12,6 +12,7 @@ import {
 import Form from 'components/UploadForm/Form';
 import Toogle from 'components/UploadForm/Toogle';
 import ProgressBar from 'components/UploadForm/ProgressBar';
+import { useSession } from 'next-auth/react';
 
 type NextPageWithLayout = NextPage & {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,13 @@ const Upload: NextPageWithLayout = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const { data: session } = useSession();
+
+  //precisa do email do user logado pra vincular a foto:
+  const user = {
+    email: session?.user?.email,
+  };
+
   const onFileUploadChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target;
 
@@ -34,13 +42,14 @@ const Upload: NextPageWithLayout = () => {
     }
 
     if (!fileInput.files || fileInput.files.length === 0) {
-      alert('Lista de arquivos vazia');
+      alert('Sem arquivos');
       return;
     }
 
     const file = fileInput.files[0];
 
     /** File validation */
+    console.log(file.type);
     if (!file.type.startsWith('image')) {
       alert('Selecione um arquivo de imagem');
       return;
@@ -60,8 +69,36 @@ const Upload: NextPageWithLayout = () => {
     console.log('From onCancelFile');
   };
 
-  const onUploadFile = (e: MouseEvent<HTMLButtonElement>) => {
+  const onUploadFile = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      let formData = new FormData();
+      formData.append('file', file);
+      formData.append('email', user.email);
+
+      // TODOFE = pegar o nomeDoc
+      // formData.append('nomeDoc', {nomeDoc});
+
+      const options: AxiosRequestConfig = {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      };
+
+      const data = await axios.post('/api/visitante/upload', formData, options);
+
+      console.log('File was uploaded successfylly:', data);
+    } catch (e: any) {
+      console.error(e);
+      const error =
+        e.response && e.response.data
+          ? e.response.data.error
+          : 'Desculpa, tem algo errado!';
+      alert(error);
+    }
   };
 
   const changeHandler = (e) => {

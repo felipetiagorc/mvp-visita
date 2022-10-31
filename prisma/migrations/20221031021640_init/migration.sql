@@ -58,12 +58,12 @@ CREATE TABLE "Visitante" (
 
 -- CreateTable
 CREATE TABLE "Documento" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "nomeDoc" TEXT NOT NULL,
-    "dataExpira" TIMESTAMP(3) NOT NULL,
+    "dataExpira" DATE NOT NULL,
     "validado" BOOLEAN NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "visitanteId" TEXT,
+    "createdAt" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "caminho" TEXT NOT NULL,
     "userId" TEXT,
 
     CONSTRAINT "Documento_pkey" PRIMARY KEY ("id")
@@ -92,6 +92,3 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Documento" ADD CONSTRAINT "Documento_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Documento" ADD CONSTRAINT "Documento_visitanteId_fkey" FOREIGN KEY ("visitanteId") REFERENCES "Visitante"("id") ON DELETE SET NULL ON UPDATE CASCADE;
