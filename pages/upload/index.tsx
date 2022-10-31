@@ -19,12 +19,12 @@ type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-const imageMimeType = /image\/(png|jpg|jpeg)/i;
+// const imageMimeType = /image\/(png|jpg|jpeg)/i;
 
 const Upload: NextPageWithLayout = () => {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
+  // const [progress, setProgress] = useState(0);
 
   const { data: session } = useSession();
 
@@ -101,14 +101,14 @@ const Upload: NextPageWithLayout = () => {
     }
   };
 
-  const changeHandler = (e) => {
-    const file = e.target.files[0];
-    if (!file.type.match(imageMimeType)) {
-      alert('O formato da imagem não é válido');
-      return;
-    }
-    setFile(file);
-  };
+  // const changeHandler = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file.type.match(imageMimeType)) {
+  //     alert('O formato da imagem não é válido');
+  //     return;
+  //   }
+  //   setFile(file);
+  // };
 
   return (
     <>
