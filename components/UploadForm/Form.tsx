@@ -2,6 +2,7 @@ export default function Form({
   onFileUploadChange,
   onCancelFile,
   onUploadFile,
+  nomeDoc,
 }) {
   return (
     <>
@@ -9,6 +10,7 @@ export default function Form({
         className="w-full p-3 border border-gray-500 border-dashed"
         onSubmit={(e) => e.preventDefault()}
       >
+        <input type="text" id="nomeDoc" value={nomeDoc} />
         <div className="flex justify-center mt-8">
           <div className="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
             <p className="flex p-2 text-gray-600">Como deseja enviar:</p>

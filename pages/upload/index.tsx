@@ -25,6 +25,7 @@ const Upload: NextPageWithLayout = () => {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   // const [progress, setProgress] = useState(0);
+  const [doc, setDoc] = useState(null);
 
   const { data: session } = useSession();
 
@@ -35,6 +36,7 @@ const Upload: NextPageWithLayout = () => {
 
   const onFileUploadChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target;
+    console.log(e.target);
 
     if (!fileInput.files) {
       alert('Nenhum arquivo escolhido');
@@ -80,6 +82,9 @@ const Upload: NextPageWithLayout = () => {
       let formData = new FormData();
       formData.append('file', file);
       formData.append('email', user.email);
+      formData.append('nomeDoc', doc);
+
+      console.log('formData: ', ...formData);
 
       // TODOFE = pegar o nomeDoc
       // formData.append('nomeDoc', {nomeDoc});
@@ -118,6 +123,7 @@ const Upload: NextPageWithLayout = () => {
           onFileUploadChange={onFileUploadChange}
           onCancelFile={onCancelFile}
           onUploadFile={onUploadFile}
+          nomeDoc={doc}
         />
       </Toogle>
     </>
