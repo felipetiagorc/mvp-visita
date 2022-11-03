@@ -7,8 +7,8 @@ export default function Upload() {
     <>
       <UploadForm nomeDoc="RG" />
       <UploadForm nomeDoc="CPF" />
-      <UploadForm nomeDoc="CPF" />
-      <UploadForm nomeDoc="CPF" />
+      <UploadForm nomeDoc="CAra" />
+      <UploadForm nomeDoc="zz" />
     </>
   );
 }

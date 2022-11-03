@@ -1,9 +1,109 @@
-export default function Form({
-  onFileUploadChange,
-  onCancelFile,
-  onUploadFile,
-  nomeDoc,
-}) {
+import FilePreview from './FilePreview';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+
+export default function Form({ nomeDoc }) {
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  // const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    // create the preview
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+
+  const { data: session } = useSession();
+
+  // const relacaoDocsVisita = ['RG-Frente', 'RG-Verso', 'CPF', 'Certidão'];
+
+  const user = {
+    email: session?.user?.email,
+  };
+
+  const onFileUploadChange = (e) => {
+    setFile({ [e.target.name]: URL.createObjectURL(e.target.files[0]) });
+
+    // antes:
+    // const fileInput = e.target;
+    // console.log('e.target: ', e.target);
+
+    // if (!fileInput.files) {
+    //   alert('Nenhum arquivo escolhido');
+    //   return;
+    // }
+
+    // if (!fileInput.files || fileInput.files.length === 0) {
+    //   alert('Sem arquivos');
+    //   return;
+    // }
+
+    // const file = fileInput.files[0];
+
+    // /** File validation */
+    // console.log('file.type: ', file.type);
+    // if (!file.type.startsWith('image')) {
+    //   alert('Selecione um arquivo de imagem');
+    //   return;
+    // }
+
+    /** Setting file state */
+    // setFile(file);
+    // console.log('setFile:', file);
+    // setPreviewUrl(URL.createObjectURL(file));
+    // console.log('preview-url:', previewUrl);
+
+    // /** Reset file input */
+    // e.currentTarget.type = 'text';
+    // e.currentTarget.type = 'file';
+  };
+
+  const onCancelFile = (e) => {
+    e.preventDefault();
+    console.log('From onCancelFile');
+  };
+
+  const onUploadFile = async (e) => {
+    e.preventDefault();
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      let formData = new FormData();
+      formData.append('file', file);
+      formData.append('email', user.email);
+      // formData.append('nomeDoc', docInputName);
+
+      formData.forEach((value, key) => {
+        console.log('formData: ', key + ' ' + value);
+      });
+
+      // TODOFE = pegar o nomeDoc
+      // formData.append('nomeDoc', {nomeDoc});
+
+      const options = {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      };
+
+      const data = await axios.post('/api/visitante/upload', formData, options);
+
+      console.log('File was uploaded successfylly:', data);
+    } catch (e) {
+      console.error(e);
+      const error =
+        e.response && e.response.data
+          ? e.response.data.error
+          : 'Desculpa, tem algo errado!';
+      alert(error);
+    }
+  };
+
   return (
     <>
       <form
@@ -79,6 +179,8 @@ export default function Form({
           </div>
         </div>
 
+        {previewUrl ? <FilePreview fileDataURL={previewUrl} /> : null}
+        <br />
         <button
           disabled={true}
           onClick={onCancelFile}
