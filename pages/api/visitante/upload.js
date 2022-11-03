@@ -1,8 +1,12 @@
 import nc from 'next-connect';
 import uploadMulterS3 from 'utils/uploadMulterS3';
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+// eu tava duplicando conexao:
+// import { PrismaClient } from '@prisma/client';
+// const prisma = new PrismaClient();
+
+//o certo é assim: #faltatestar
+import prisma from 'lib/prisma';
 
 const handler = nc({
   onError(error, req, res) {

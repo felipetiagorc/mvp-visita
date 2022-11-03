@@ -1,26 +1,26 @@
-import { ChangeEvent, MouseEvent, useState } from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
+import { useState } from 'react';
+import axios from 'axios';
 
 import Form from 'components/UploadForm/Form';
 import Toogle from 'components/UploadForm/Toogle';
 import ProgressBar from 'components/UploadForm/ProgressBar';
 import { useSession } from 'next-auth/react';
 
-const UploadForm = () => {
-  const [docInputName, setDocInputName] = useState(null);
+export const UploadForm = (props) => {
+  const [docInputName] = useState(null);
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   // const [progress, setProgress] = useState(0);
 
   const { data: session } = useSession();
 
-  const relacaoDocsVisita = ['RG-Frente', 'RG-Verso', 'CPF', 'Certidão'];
+  // const relacaoDocsVisita = ['RG-Frente', 'RG-Verso', 'CPF', 'Certidão'];
 
   const user = {
     email: session?.user?.email,
   };
 
-  const onFileUploadChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onFileUploadChange = (e) => {
     const fileInput = e.target;
     console.log(e.target);
 
@@ -46,19 +46,19 @@ const UploadForm = () => {
     /** Setting file state */
     setFile(file);
     console.log(file);
-    setPreviewUrl(URL.createObjectURL(file)); // we will use this to show the preview of the image
+    setPreviewUrl(URL.createObjectURL(file));
 
     /** Reset file input */
     e.currentTarget.type = 'text';
     e.currentTarget.type = 'file';
   };
 
-  const onCancelFile = (e: MouseEvent<HTMLButtonElement>) => {
+  const onCancelFile = (e) => {
     e.preventDefault();
     console.log('From onCancelFile');
   };
 
-  const onUploadFile = async (e: MouseEvent<HTMLButtonElement>) => {
+  const onUploadFile = async (e) => {
     e.preventDefault();
 
     if (!file) {
@@ -78,14 +78,14 @@ const UploadForm = () => {
       // TODOFE = pegar o nomeDoc
       // formData.append('nomeDoc', {nomeDoc});
 
-      const options: AxiosRequestConfig = {
+      const options = {
         headers: { 'Content-Type': 'multipart/form-data' },
       };
 
       const data = await axios.post('/api/visitante/upload', formData, options);
 
       console.log('File was uploaded successfylly:', data);
-    } catch (e: any) {
+    } catch (e) {
       console.error(e);
       const error =
         e.response && e.response.data
@@ -104,23 +104,17 @@ const UploadForm = () => {
   //   setFile(file);
   // };
 
-  {
-    relacaoDocsVisita.forEach((doc) => {
-      return (
-        <>
-          <Toogle nomeDoc={doc} fileDataURL={previewUrl}>
-            <ProgressBar />
-            <Form
-              onFileUploadChange={onFileUploadChange}
-              onCancelFile={onCancelFile}
-              onUploadFile={onUploadFile}
-              nomeDoc={doc}
-            />
-          </Toogle>
-        </>
-      );
-    });
-  }
+  return (
+    <>
+      <Toogle nomeDoc={props.nomeDoc} fileDataURL={previewUrl}>
+        <ProgressBar />
+        <Form
+          onFileUploadChange={onFileUploadChange}
+          onCancelFile={onCancelFile}
+          onUploadFile={onUploadFile}
+          nomeDoc={props.nomeDoc}
+        />
+      </Toogle>
+    </>
+  );
 };
-
-export default UploadForm;

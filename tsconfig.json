@@ -23,7 +23,9 @@
     "**/*.tsx",
     "pages/upload/index.js",
     "pages/index.js",
-    "components/layout.js"
+    "components/layout.js",
+    "components/UploadForm/index.jsx",
+    "pages/upload/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
