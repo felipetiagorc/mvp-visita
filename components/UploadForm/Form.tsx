@@ -9,12 +9,16 @@ export default function Form({ nomeDoc }) {
 
   // const [progress, setProgress] = useState(0);
   useEffect(() => {
-    // create the preview
-    const objectUrl = URL.createObjectURL(file);
-    setPreviewUrl(objectUrl);
-
-    // free memory when ever this component is unmounted
-    return () => URL.revokeObjectURL(objectUrl);
+    if (file) {
+      // create the preview
+      const objectUrl = new FileReader();
+      objectUrl.onloadend = () => {
+        setPreviewUrl(objectUrl.result as string);
+      };
+      objectUrl.readAsDataURL(file);
+    } else {
+      setPreviewUrl(null);
+    }
   }, [file]);
 
   const { data: session } = useSession();
@@ -26,23 +30,21 @@ export default function Form({ nomeDoc }) {
   };
 
   const onFileUploadChange = (e) => {
-    setFile({ [e.target.name]: URL.createObjectURL(e.target.files[0]) });
-
     // antes:
-    // const fileInput = e.target;
+    let fileInput = e.target;
     // console.log('e.target: ', e.target);
 
-    // if (!fileInput.files) {
-    //   alert('Nenhum arquivo escolhido');
-    //   return;
-    // }
+    if (!fileInput.files) {
+      alert('Nenhum arquivo escolhido');
+      return;
+    }
 
-    // if (!fileInput.files || fileInput.files.length === 0) {
-    //   alert('Sem arquivos');
-    //   return;
-    // }
+    if (!fileInput.files || fileInput.files.length === 0) {
+      alert('Sem arquivos');
+      return;
+    }
 
-    // const file = fileInput.files[0];
+    const file = fileInput.files[0];
 
     // /** File validation */
     // console.log('file.type: ', file.type);
@@ -52,7 +54,7 @@ export default function Form({ nomeDoc }) {
     // }
 
     /** Setting file state */
-    // setFile(file);
+    setFile(file);
     // console.log('setFile:', file);
     // setPreviewUrl(URL.createObjectURL(file));
     // console.log('preview-url:', previewUrl);

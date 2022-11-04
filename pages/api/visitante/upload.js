@@ -24,14 +24,15 @@ const handler = nc({
   .use(uploadMulterS3.single('file'))
 
   .post(async (req, res) => {
-    const { email } = req.body;
+    const { email, nomeDoc } = req.body;
+    console.log('req.file.locat: ', req.file.location);
 
     await prisma.user.update({
       where: { email: email },
       data: {
         documentos: {
           create: {
-            nomeDoc: 'cpf',
+            nomeDoc: nomeDoc,
             dataExpira: new Date('2022-03-19'),
             validado: false,
             caminho: req.file.location,

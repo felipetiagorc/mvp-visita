@@ -1,8 +1,13 @@
-import Toggle from './Toggle';
-import Form from 'components/UploadForm/Form';
-import ProgressBar from 'components/UploadForm/ProgressBar';
+import ImagePreviewer from './ImagePreviewer';
 
-export const UploadForm = (props) => {
+// docs:
+const documentos = [
+  { type: 'rg', name: 'rg', label: 'RG' },
+  { type: 'cpf', name: 'cpf', label: 'CPF' },
+  { type: 'certidao', name: 'certidao', label: 'Certidão' },
+];
+
+export const UploadForm = () => {
   // const changeHandler = (e) => {
   //   const file = e.target.files[0];
   //   if (!file.type.match(imageMimeType)) {
@@ -14,17 +19,9 @@ export const UploadForm = (props) => {
 
   return (
     <>
-      <Toggle nomeDoc={props.nomeDoc}>
-        <>
-          <ProgressBar />
-          <Form
-            onFileUploadChange={props.onFileUploadChange}
-            onCancelFile={props.onCancelFile}
-            onUploadFile={props.onUploadFile}
-            nomeDoc={props.nomeDoc}
-          />
-        </>
-      </Toggle>
+      {documentos.map((data) => (
+        <ImagePreviewer key={data.type} data={data} />
+      ))}
     </>
   );
 };
