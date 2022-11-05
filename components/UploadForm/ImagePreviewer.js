@@ -12,7 +12,7 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
     if (image) {
       const path = URL.createObjectURL(image);
       const data = {
-        image: image,
+        file: image,
         path: path,
       };
       cb(data);
@@ -33,13 +33,9 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
 
     try {
       let formData = new FormData();
-      formData.append('file', image);
       formData.append('email', session.user.email);
       formData.append('nomeDoc', type);
-
-      formData.forEach((value, key) => {
-        console.log('formData: ', key + ' ' + value);
-      });
+      formData.append('file', image.file);
 
       const options = {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -70,8 +66,25 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
         <FileInput
           id={name}
           name={name}
-          labelText={<p className="bg-lime-300">Escolher {label}</p>}
+          labelText={
+            <p className="bg-lime-300 cursor-pointer p-2 w">
+              Enviar arquivo {label}
+            </p>
+          }
           onChange={handleUpdate}
+        />
+
+        <FileInput
+          id={name}
+          name={name}
+          labelText={
+            <p className="bg-lime-300 cursor-pointer p-2 w">
+              Tirar Foto {label}
+            </p>
+          }
+          onChange={handleUpdate}
+          accept="image/*"
+          capture="camera"
         />
         <button onClick={handleUpload}>Enviar</button>
       </div>

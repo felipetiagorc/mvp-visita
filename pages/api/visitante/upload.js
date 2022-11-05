@@ -25,7 +25,6 @@ const handler = nc({
 
   .post(async (req, res) => {
     const { email, nomeDoc } = req.body;
-    console.log('req.file.locat: ', req.file.location);
 
     await prisma.user.update({
       where: { email: email },
