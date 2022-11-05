@@ -84,7 +84,7 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
           }
           onChange={handleUpdate}
           accept="image/*"
-          capture="camera"
+          capture="environment"
         />
         <button onClick={handleUpload}>Enviar</button>
       </div>
