@@ -5,10 +5,10 @@ import multerS3 from 'multer-s3';
 import { randomBytes } from 'node:crypto';
 
 aws.config.update({
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-  bucket: process.env.AWS_BUCKET,
+  secretAccessKey: process.env.SAP_AWS_SECRET_KEY,
+  accessKeyId: process.env.SAP_AWS_ACCESS_KEY,
+  region: process.env.SAP_AWS_REGION,
+  bucket: process.env.SAP_AWS_BUCKET,
 });
 
 let s3 = new aws.S3({});
