@@ -1,4 +1,5 @@
 import ImagePreviewer from './ImagePreviewer';
+import Toggle from './Toggle';
 
 // docs:
 const documentos = [
@@ -20,7 +21,9 @@ export const UploadForm = () => {
   return (
     <>
       {documentos.map((data) => (
-        <ImagePreviewer key={data.type} data={data} />
+        <Toggle key={data.type} data={data}>
+          <ImagePreviewer key={data.type} data={data} />
+        </Toggle>
       ))}
     </>
   );

@@ -11,11 +11,12 @@ const FileInput = ({
   capture,
   ...props
 }) => (
-  <form action="" encType="multpart/form-data">
-    <label
-      className="flex flex-row-reverse px-0 py-2 justify-items-start"
-      htmlFor={id}
-    >
+  <form
+    className="items-center justify-center"
+    action=""
+    encType="multpart/form-data"
+  >
+    <label className="flex flex-row-reverse px-0 py-2" htmlFor={id}>
       {labelText}
       <input
         id={id}

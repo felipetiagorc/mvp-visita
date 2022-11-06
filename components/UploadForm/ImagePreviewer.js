@@ -57,7 +57,7 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
   return (
     <div className="border  border-dashed p-3">
       {image && (
-        <div>
+        <div className="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
           <Image alt={name} src={image?.path} width={100} height={150} />
         </div>
       )}
@@ -119,21 +119,22 @@ const ImagePreviewer = ({ data: { type, name, label } }) => {
           accept="image/*"
           capture="environment"
         />
-        <div className="flex justify-around ">
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
-            onClick={handleUpload}
-          >
-            Confirmar
-          </button>
+      </div>
 
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
-            onClick={() => {}}
-          >
-            Cancelar
-          </button>
-        </div>
+      <div className="flex justify-around items-center">
+        <button
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          onClick={handleUpload}
+        >
+          Confirmar
+        </button>
+
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          onClick={() => {}}
+        >
+          Cancelar
+        </button>
       </div>
     </div>
   );
