@@ -8,11 +8,11 @@ import { Fragment } from 'react';
 import Brasao from 'public/brasao-sp-eleicao.png';
 
 const navigation = [
-  { name: 'Inicio', href: '/', current: true },
+  { name: 'Inicio', href: '/', current: false },
   { name: 'Documentos', href: '/upload', current: false },
   {
     name: 'Unidades',
-    href: 'http://www.sap.sp.gov.br/uni-prisionais/pen.html',
+    href: '#',
     current: false,
   },
 ];
@@ -91,7 +91,7 @@ export default function NavMenu() {
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
-                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="rounded-full bg-gray-300 p-1 text-gray-700 hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">Ver Notificações</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -209,7 +209,7 @@ export default function NavMenu() {
                       className={classNames(
                         item.current
                           ? 'bg-gray-900 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          : 'text-black hover:bg-gray-700 hover:text-white',
                         'block px-3 py-2 rounded-md text-base font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -241,7 +241,7 @@ export default function NavMenu() {
                     {session?.user?.name ? (
                       <button
                         type="button"
-                        className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="ml-auto flex-shrink-0 rounded-full bg-gray-300 p-1 text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">Ver Notificações</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -256,7 +256,7 @@ export default function NavMenu() {
                         key={item.name}
                         as="a"
                         href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
                       </Disclosure.Button>
