@@ -25,7 +25,8 @@
     "pages/index.js",
     "components/layout.js",
     "components/UploadForm/index.jsx",
-    "pages/upload/index.jsx"
+    "pages/upload/index.jsx",
+    "components/UploadForm/FileInput.jsx"
   ],
   "exclude": ["node_modules"]
 }
