@@ -56,7 +56,7 @@ const ImagePreviewer = ({ data: { type, name } }) => {
   return (
     <section className="flex border-1 ">
       <div className="flex flex-row flex-wrap justify-center items-center">
-        <div className="flex flex-col justify-center items-center flex-nowrap align-middle h-44 w-40 border-2 border-blue-200 border-dashed">
+        <div className="flex flex-col justify-center items-center flex-nowrap align-middle my-6 h-56 w-40 border-2 border-blue-200 border-dashed">
           {image ? (
             <Image alt={name} src={image?.path} width={160} height={190} />
           ) : (

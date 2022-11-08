@@ -48,8 +48,8 @@ export default function NavMenu() {
                     {/* Brasao */}
                     <div className="lg:block sm:flex w-auto">
                       <Image
-                        width="85"
-                        height="45"
+                        width="100"
+                        height="55"
                         src={Brasao}
                         alt="BrasaoSP"
                       />

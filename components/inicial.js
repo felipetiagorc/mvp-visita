@@ -15,7 +15,7 @@ export default function Inicial(props) {
 
       <main className="grid items-start grid-cols-1 gap-10 p-10 md:p-0 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 ">
         <section className="bg-blue-500 h-full max-h-72 transform group border-2 border-neutral-800 rounded-2xl duration-300 hover:scale-105 hover:border-blue-600 hover:-translate-y-1 hover:shadow-2xl">
-          <Link href="/login">
+          <Link href="/upload">
             <a>
               <div className="p-5 py-10 flex flex-col justify-center h-full text-center text-white">
                 <h2 className="mb-5 text-3xl">Envio de Documentos</h2>
@@ -43,7 +43,7 @@ export default function Inicial(props) {
         </section>
 
         <section className="h-full max-h-72 transform group border-2 border-neutral-800 rounded-2xl duration-300 hover:scale-105 hover:border-blue-600 hover:-translate-y-1 hover:shadow-2xl">
-          <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
+          <a href="#" target="_blank">
             <div className="p-5 py-10 flex flex-col justify-center h-full text-center">
               <h2 className="mb-5 text-3xl">Legislação</h2>
               <p className="mb-5">Resoluções e Portarias vigentes</p>
