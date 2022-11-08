@@ -4,7 +4,7 @@ import { useState } from 'react';
 import FileInput from './FileInput';
 import { useSession } from 'next-auth/react';
 
-const ImagePreviewer = ({ data: { type, name, label } }) => {
+const ImagePreviewer = ({ data: { type, name } }) => {
   const [image, setImage] = useState(null);
   const { data: session } = useSession();
 
