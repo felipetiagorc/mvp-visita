@@ -1,3 +1,5 @@
+// TO-DO: implementar arquitetura
+
 import axios, { AxiosRequestConfig } from 'axios';
 // import { ApiResponse } from '../../models/ApiResponse';
 

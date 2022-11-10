@@ -80,9 +80,8 @@ export default function NavMenu() {
                       </div>
                     ) : (
                       <p className="my-auto lg:mx-48 md:mx-32 sm:mx-12 text-center font-sans">
-                        Em atendimento à legislação eleitoral, os demais
-                        conteúdos deste site ficarão indisponíveis de 2 de julho
-                        de 2022 até o final da eleição estadual em São Paulo.
+                        Acesso público. Para visitante solicitar cadastro.
+                        Evitando telefonar para a unidade.
                       </p>
                     )}
                     {/* Fim do if  - Só mostra menu se tiver logado */}

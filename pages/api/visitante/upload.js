@@ -1,13 +1,11 @@
 import nc from 'next-connect';
-import uploadMulterS3 from 'utils/uploadMulterS3';
+import fs from 'node:fs';
+// import uploadMulterS3 from 'utils/uploadMulterS3';
+import uploadMulterFolder from 'utils/uploadMulterFolder';
 
-// eu tava duplicando conexao:
-// import { PrismaClient } from '@prisma/client';
-// const prisma = new PrismaClient();
-
-//o certo é assim: #faltatestar
 import prisma from 'lib/prisma';
 
+const outputFolderName = './public/uploads';
 const handler = nc({
   onError(error, req, res) {
     res
@@ -21,26 +19,32 @@ const handler = nc({
       .json({ error: `Método '${req.method}' não permitido!` });
   },
 })
-  .use(uploadMulterS3.single('file'))
+  // .use(uploadMulterS3.single('file'))
+  .use(uploadMulterFolder.single('file'))
 
   .post(async (req, res) => {
-    const { email, nomeDoc } = req.body;
+    const filenames = fs.readdirSync(outputFolderName);
+    const image = filenames.map((name) => name);
 
-    await prisma.user.update({
-      where: { email: email },
-      data: {
-        documentos: {
-          create: {
-            nomeDoc: nomeDoc,
-            dataExpira: new Date('2022-03-19'),
-            validado: false,
-            caminho: req.file.location,
-          },
-        },
-      },
-    });
+    return res.status(200).json({ data: image });
 
-    return res.status(200).json({ message: 'ok' });
+    // const { email, nomeDoc } = req.body;
+
+    // await prisma.user.update({
+    //   where: { email: email },
+    //   data: {
+    //     documentos: {
+    //       create: {
+    //         nomeDoc: nomeDoc,
+    //         dataExpira: new Date('2022-03-19'),
+    //         validado: false,
+    //         caminho: req.file.location,
+    //       },
+    //     },
+    //   },
+    // });
+
+    // return res.status(200).json({ message: 'ok' });
   })
   .get(async (req, res) => {
     const userId = req.query.userId;

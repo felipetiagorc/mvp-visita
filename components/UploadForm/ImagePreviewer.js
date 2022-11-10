@@ -27,6 +27,7 @@ const ImagePreviewer = ({ data: { type, name } }) => {
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!image) {
+      console.log('nenhuma imagem selecionada!');
       return;
     }
 
