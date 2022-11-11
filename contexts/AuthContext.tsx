@@ -21,6 +21,7 @@ type SignInData = {
 type AuthContextType = {
   isAuthenticated: boolean;
   user: User;
+  // eslint-disable-next-line no-unused-vars
   signIn: (data: SignInData) => Promise<void>;
 };
 
