@@ -2,11 +2,11 @@ import Image from 'next/future/image';
 import axios from 'axios';
 import { useState } from 'react';
 import FileInput from './FileInput';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 
 const ImagePreviewer = ({ data: { type, name } }) => {
   const [image, setImage] = useState(null);
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const updateData = (image, cb) => {
     if (image) {
@@ -33,7 +33,8 @@ const ImagePreviewer = ({ data: { type, name } }) => {
 
     try {
       let formData = new FormData();
-      formData.append('email', session.user.email);
+      // formData.append('email', session.user.email);
+      formData.append('email', 'felipe@yahcoo.com');
       formData.append('nomeDoc', type);
       formData.append('file', image.file);
 

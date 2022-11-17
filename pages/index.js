@@ -1,30 +1,22 @@
-import { getSession } from 'next-auth/react';
-import Inicial from 'components/inicial';
+// import Inicial from 'components/inicial';
 import Header from 'components/Header';
+import { useContext } from 'react';
+import { AuthContext } from 'contexts/AuthContext';
+import Login from 'components/Login';
 
-// validar isso e redirecionar para a tela de login - ( Pelo Server Side)
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
+export default function Home() {
+  const { signIn } = useContext(AuthContext);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
+  async function handleSignIn(data) {
+    // console.log(data);
+
+    //fazer try catch caso autenticacoo falhe:
+    await signIn(data);
   }
-  return {
-    props: {
-      session,
-    },
-  };
-};
 
-export default function Home({ session }) {
   return (
     <>
-      <Inicial user={session?.user?.name} />
+      <Login handleSignIn={handleSignIn} />
     </>
   );
 }

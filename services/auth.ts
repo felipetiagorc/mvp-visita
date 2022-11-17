@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 type SignInRequestData = {
   email: string;
-  password: string;
+  senha: string;
 };
 
 const delay = (amount = 750) =>
@@ -21,6 +21,9 @@ export async function signInRequest(data: SignInRequestData) {
     },
   };
 }
+
+//aqui ele não ta passando param nenhum, mas precisaria receber o token do backend
+// essa função deve receber o token e recuperar os dados do usuário
 
 export async function recoverUserInformation() {
   await delay();

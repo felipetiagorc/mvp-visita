@@ -5,7 +5,8 @@ import Router from 'next/router';
 //https://www.youtube.com/watch?v=pvrKHpXGO8E&t=2684s
 
 import { recoverUserInformation, signInRequest } from '../services/auth';
-import { api } from '../services/api';
+import { api } from 'services/api';
+// import { api } from '../services/api';
 
 type User = {
   name: string;
@@ -15,7 +16,7 @@ type User = {
 
 type SignInData = {
   email: string;
-  password: string;
+  senha: string;
 };
 
 type AuthContextType = {
@@ -33,7 +34,7 @@ export function AuthProvider({ children }) {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const { 'nextauth.token': token } = parseCookies();
+    const { 'visita.token': token } = parseCookies();
 
     if (token) {
       recoverUserInformation().then((response) => {
@@ -42,21 +43,22 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  async function signIn({ email, password }: SignInData) {
+  async function signIn({ email, senha }: SignInData) {
     const { token, user } = await signInRequest({
       email,
-      password,
+      senha,
     });
 
-    setCookie(undefined, 'nextauth.token', token, {
-      maxAge: 60 * 60 * 1, // 1 hour
+    setCookie(undefined, 'visita.token', token, {
+      maxAge: 60 * 60 * 1, // 1 hora
     });
 
+    //cada vez q faz autenticacao gera novo token:
     api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     setUser(user);
 
-    Router.push('/dashboard');
+    Router.push('/upload');
   }
 
   return (

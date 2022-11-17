@@ -1,11 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Fragment } from 'react';
 // eslint-disable-next-line
 import Brasao from 'public/brasao-sp-eleicao.png';
+
+import { useContext } from 'react';
+import { AuthContext } from 'contexts/AuthContext';
+
+// import { signOut, useSession } from 'next-auth/react';
 
 const navigation = [
   { name: 'Inicio', href: '/', current: false },
@@ -28,13 +32,9 @@ function classNames(...classes) {
 }
 
 export default function NavMenu() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  const user = {
-    name: session?.user?.name,
-    email: session?.user?.email,
-    imageUrl: session?.user?.image,
-  };
+  const { user } = useContext(AuthContext);
 
   return (
     <>
@@ -58,7 +58,7 @@ export default function NavMenu() {
                     {/* Navegação */}
 
                     {/* Só mostra menu se tiver logado */}
-                    {session ? (
+                    {user ? (
                       <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
                           {navigation.map((item) => (
@@ -96,7 +96,7 @@ export default function NavMenu() {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
 
-                      {session?.user?.name ? (
+                      {user?.name ? (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                           {/* Profile dropdown */}
                           <Menu as="div" className="relative ml-3">
@@ -106,10 +106,10 @@ export default function NavMenu() {
 
                                 {/* Imagem do usuario logado ou "nada" */}
                                 <div className="flex">
-                                  {user.imageUrl && (
+                                  {user?.avatar_url && (
                                     <Image
                                       className="rounded-full"
-                                      src={user.imageUrl}
+                                      src={user.avatar_url}
                                       alt="user"
                                       width="50px"
                                       height="50px"
@@ -157,7 +157,7 @@ export default function NavMenu() {
                                 <Menu.Item>
                                   {({ active }) => (
                                     <a
-                                      onClick={() => signOut()}
+                                      onClick={() => {}}
                                       href="#"
                                       className={classNames(
                                         active ? 'bg-gray-100' : '',
@@ -222,7 +222,7 @@ export default function NavMenu() {
                     <div className="flex-shrink-0">
                       <Image
                         className="rounded-full"
-                        src={session?.user?.image}
+                        src={user?.avatar_url}
                         alt="user"
                         width="50px"
                         height="50px"
@@ -230,14 +230,14 @@ export default function NavMenu() {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {session?.user?.name}
+                        {user?.name}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
-                        {session?.user?.email}
+                        {user?.email}
                       </div>
                     </div>
 
-                    {session?.user?.name ? (
+                    {user?.name ? (
                       <button
                         type="button"
                         className="ml-auto flex-shrink-0 rounded-full bg-gray-300 p-1 text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
