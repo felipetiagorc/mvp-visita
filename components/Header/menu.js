@@ -82,7 +82,9 @@ export default function NavMenu() {
                       <p className="my-auto lg:mx-48 md:mx-32 sm:mx-12 text-center font-sans">
                         Visível ao público para tirar dúvidas e solicitar
                         cadastro, evitando ligar na unidade. A SAP poderia
-                        atualizar resoluções e Unidades incluírem avisos
+                        atualizar resoluções e Unidades incluírem avisos Acesso
+                        público. Para visitante solicitar cadastro. Evitando
+                        telefonar para a unidade.
                       </p>
                     )}
                     {/* Fim do if  - Só mostra menu se tiver logado */}
