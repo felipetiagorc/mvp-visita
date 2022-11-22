@@ -1,7 +1,7 @@
 import Image from 'next/future/image';
 import axios from 'axios';
 import { useState } from 'react';
-import FileInput from './FileInput';
+import FileInput from '../FileInput/FileInput';
 import { useSession } from 'next-auth/react';
 
 const ImagePreviewer = ({ data: { type, name } }) => {
