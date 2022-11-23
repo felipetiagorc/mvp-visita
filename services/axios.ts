@@ -6,7 +6,7 @@ export function getApiClient(ctx?: any) {
   const { 'visita.token': token } = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'http://localhost:3333',
+    baseURL: process.env.BASE_URL,
   });
 
   //pq essa rota nao existe, ta criando esse iterceptor em toda req q o axios faz:

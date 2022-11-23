@@ -18,7 +18,7 @@ let storageConfig = multer.diskStorage({
   fileFilter: function (req, file, callback) {
     var ext = path.extname(file.originalname);
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg' && ext !== '.pdf') {
-      return callback(new Error('Apenas imagens e pdf'));
+      return callback(new Error('Apenas imagens ou pdf'));
     }
     callback(null, true);
   },
