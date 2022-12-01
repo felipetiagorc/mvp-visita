@@ -5,7 +5,6 @@ import uploadMulterFolder from 'utils/uploadMulterFolder';
 
 import prisma from 'lib/prisma';
 
-const outputFolderName = './public/uploads';
 const handler = nc({
   onError(error, req, res) {
     res
@@ -23,28 +22,28 @@ const handler = nc({
   .use(uploadMulterFolder.single('file'))
 
   .post(async (req, res) => {
-    const filenames = fs.readdirSync(outputFolderName);
-    const image = filenames.map((name) => name);
+    // const filenames = fs.readdirSync('./public/uploads');
+    // const image = filenames.map((name) => name);
 
-    return res.status(200).json({ data: image });
+    // return res.status(200).json({ data: image });
 
-    // const { email, nomeDoc } = req.body;
+    const { email, nomeDoc } = req.body;
+    console.log(req.file);
+    await prisma.user.update({
+      where: { email: email },
+      data: {
+        documentos: {
+          create: {
+            nomeDoc: nomeDoc,
+            dataExpira: new Date('2022-03-19'),
+            validado: false,
+            caminho: req.file.destination + '/' + req.file.filename,
+          },
+        },
+      },
+    });
 
-    // await prisma.user.update({
-    //   where: { email: email },
-    //   data: {
-    //     documentos: {
-    //       create: {
-    //         nomeDoc: nomeDoc,
-    //         dataExpira: new Date('2022-03-19'),
-    //         validado: false,
-    //         caminho: req.file.location,
-    //       },
-    //     },
-    //   },
-    // });
-
-    // return res.status(200).json({ message: 'ok' });
+    return res.status(200).json({ message: 'Registrado no banco!' });
   })
   .get(async (req, res) => {
     const userId = req.query.userId;

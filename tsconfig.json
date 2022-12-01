@@ -21,12 +21,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/upload/index.js",
+    "pages/upload/dropzoneFacil.js",
     "pages/index.js",
     "components/layout.js",
     "components/UploadForm/index.jsx",
-    "pages/upload/index.jsx",
-    "components/UploadForm/FileInput.jsx"
+    "pages/upload/index.tsx",
+    "components/FileInput/FileInput.jsx",
+    "services/upload.service.js"
   ],
   "exclude": ["node_modules"]
 }
