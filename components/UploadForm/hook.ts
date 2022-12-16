@@ -17,11 +17,6 @@ export const useUploadForm = (url: string) => {
         const progress = (progressEvent.loaded / progressEvent.total) * 50;
         setProgress(progress);
       },
-      onDownloadProgress: (progressEvent) => {
-        const progress = 50 + (progressEvent.loaded / progressEvent.total) * 50;
-        console.log(progress);
-        setProgress(progress);
-      },
     });
     setProgress(100);
     await new Promise((resolve) => {
