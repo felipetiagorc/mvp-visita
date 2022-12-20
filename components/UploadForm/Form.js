@@ -29,15 +29,18 @@ function Form({ data: { nomeDoc }, pushImages }) {
   const [image, setImage] = useState(null);
 
   const updatePreview = (image, cb) => {
+    let imgId = 0;
     if (image) {
       const path = URL.createObjectURL(image);
       const data = {
-        id: , 
+        id: imgId++,
         file: image,
+        nomeDoc: nomeDoc,
         path: path,
       };
       cb(data);
-      pushImages(data.path);
+      pushImages(data);
+      // pushImages(data.path);   ok
     }
     return;
   };
