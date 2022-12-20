@@ -15,12 +15,12 @@
  **/
 
 // import axios from 'axios';
+
 import { useState } from 'react';
 import FileInput from './FileInput';
 import { useSession } from 'next-auth/react';
 import FilePreview from './FilePreview';
 // import ProgressBar from './ProgressBar';
-
 // import { Container } from './styles';
 
 function Form({ data: { nomeDoc }, pushImages }) {
@@ -32,6 +32,7 @@ function Form({ data: { nomeDoc }, pushImages }) {
     if (image) {
       const path = URL.createObjectURL(image);
       const data = {
+        id: , 
         file: image,
         path: path,
       };
@@ -72,7 +73,11 @@ function Form({ data: { nomeDoc }, pushImages }) {
 
           <div className="my-2">
             {image ? (
-              <FilePreview fileDataURL={image.path} alt={nomeDoc} />
+              <FilePreview
+                fileDataURL={image.path}
+                labelText={nomeDoc}
+                alt={nomeDoc}
+              />
             ) : (
               <></>
             )}

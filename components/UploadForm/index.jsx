@@ -35,8 +35,15 @@ const documentos = [
 //   },
 // ];
 
-//tentar gerir o estado aqui no pai deles.
-// parece q ja fiz isso e deu errado.. a mesma foto ia pra todos docs.
+// gerar initialState para as 'images' selecionadas, com a Key sendo o nome de cada documento e o valor ''.
+// tb precisa gerar id pra cada imagem .. .pra poder excluir ..
+
+const docsInitialState = documentos.map((doc) => {
+  {
+    doc.nomeDoc;
+  }
+});
+console.log('docsInitialState: ', docsInitialState);
 
 export const UploadForm = () => {
   const [images, setImages] = useState([]);
@@ -47,7 +54,7 @@ export const UploadForm = () => {
 
   return (
     <>
-      <pre>Images: {JSON.stringify(images)}</pre>
+      <div>Images: {JSON.stringify(images)}</div>
 
       {documentos.map((data) => (
         <Toggle key={data.tipoDoc} data={data} pushImages={pushImages}>
