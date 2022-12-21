@@ -29,11 +29,9 @@ function Form({ data: { nomeDoc }, pushImages }) {
   const [image, setImage] = useState(null);
 
   const updatePreview = (image, cb) => {
-    let imgId = 0;
     if (image) {
       const path = URL.createObjectURL(image);
       const data = {
-        id: imgId++,
         file: image,
         nomeDoc: nomeDoc,
         path: path,

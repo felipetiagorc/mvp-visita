@@ -36,44 +36,35 @@ const documentos = [
 //   },
 // ];
 
-const docList = documentos.map((doc) => doc.nomeDoc);
-// ['RG', 'CPF', 'CERTIDAO']
+const docList = documentos.map((doc) => doc.nomeDoc.toLowerCase());
+// ['rg', 'cpf', 'certidao']
 
-const docState = [];
-docList.forEach((doc) =>
-  docState.push({
-    id: null,
-    file: null,
-    nomeDoc: '',
-    path: null,
-  })
-);
-console.log('docState: ', docState);
+// const docState = [];
+// docList.forEach((doc) =>
+//   docState.push({
+
+//     file: '',
+//     nomeDoc: doc.toLowerCase(),
+//     path: '',
+//   })
+// );
 
 export const UploadForm = () => {
-  const [images, setImages] = useState(docState);
+  const [images, setImages] = useState([]);
 
   function pushImages(image) {
-    var index = images.findIndex((x) => x.nomeDoc === image.nomeDoc);
-    console.log('index: ', index);
-    if (index == -1) {
-      setImages([image]);
-    }
-    // se ja tiver uma imagem no 'nomeDoc', substitui..
-    // if (images.findIndex((x) => x.nomeDoc == image.nomeDoc)) {
-    setImages(
-      images.map((item) => {
-        return item.nomeDoc === image.nomeDoc;
-      })
-    );
-    // }
-    // se não tiver, insere (set...normal )
-
-    // setImages([...images, image]);
+    images.filter(function (obj) {
+      if (obj.hasOwnProperty(image.nomeDoc.toLowerCase())) {
+        setImages([image]);
+      } else {
+        setImages([...images, image]);
+      }
+    });
   }
 
   const handleSubmit = async () => {
-    if (!image) {
+    // if (!image) {
+    if (!images) {
       console.log('nenhuma imagem selecionada!');
       return;
     }
