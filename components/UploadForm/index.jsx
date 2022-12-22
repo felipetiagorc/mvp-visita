@@ -50,23 +50,31 @@ const docList = documentos.map((doc) => doc.nomeDoc.toLowerCase());
 
 var initialState = [];
 for (let i = 0; i < docList.length; i++) {
-  initialState.push({ nomeDoc: docList[i], file: '', path: '' });
+  initialState.push(new Object(docList[i]: { docList[i], file: '', path: '' });
   //[{"nomeDoc":"rg","file":"","path":""},{"nomeDoc":"cpf","file":"","path":""},{"nomeDoc":"certidao","file":"","path":""}]
 }
 
 export const UploadForm = () => {
-  const [images, setImages] = useState();
+  const [images, setImages] = useState(initialState);
 
   function pushImages(image) {
     // se ja existe:
-    if (
-      images &&
-      Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1
-    ) {
-      setImages([image]);
+    if (images[0].nomeDoc == image.nomeDoc) {
+      if (images[0].file == '') {
+        setImages(image);
+        console.log('nao tinha..');
+      }
+      console.log('caindo aqui');
+      return;
     } else {
-      setImages((...prev) => [...prev, image]);
+      // if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
+      setImages((...prev) => {
+        [...prev, image];
+      });
+      // [...prev, image]);
+      console.log('ja tinha..');
     }
+    console.log('nada');
   }
 
   const handleSubmit = async () => {

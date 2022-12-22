@@ -32,8 +32,8 @@ function Form({ data: { nomeDoc }, pushImages }) {
     if (image) {
       const path = URL.createObjectURL(image);
       const data = {
-        file: image,
         nomeDoc: nomeDoc,
+        file: image,
         path: path,
       };
       cb(data);
