@@ -36,44 +36,45 @@ const documentos = [
 //   },
 // ];
 
-const docList = documentos.map((doc) => doc.nomeDoc.toLowerCase());
-// ['rg', 'cpf', 'certidao']
+//ao inves disso aqui, preciso pegar o nome ou id do input.. e verificar se já existe no state.
 
-// quero:
+// const docList = documentos.map((doc) => doc.nomeDoc.toLowerCase());
+// // ['rg', 'cpf', 'certidao']
 
-/**  "doc": {
- *       file:
- *    }
- *
- *
- */
+// // quero:
 
-var initialState = [];
-for (let i = 0; i < docList.length; i++) {
-  initialState.push(new Object(docList[i]: { docList[i], file: '', path: '' });
-  //[{"nomeDoc":"rg","file":"","path":""},{"nomeDoc":"cpf","file":"","path":""},{"nomeDoc":"certidao","file":"","path":""}]
-}
+// /**  "doc": {
+//  *       file:
+//  *    }
+//  *
+//  *
+//  */
+
+// // var initialState = [];
+
+// // for (let i = 0; i < docList.length; i++) {
+// // initialState.push(new Object(docList[i]: { docList[i], file: '', path: '' });
+// //[{"nomeDoc":"rg","file":"","path":""},{"nomeDoc":"cpf","file":"","path":""},{"nomeDoc":"certidao","file":"","path":""}]
+// // }
 
 export const UploadForm = () => {
-  const [images, setImages] = useState(initialState);
+  const [images, setImages] = useState([]);
 
   function pushImages(image) {
-    // se ja existe:
-    if (images[0].nomeDoc == image.nomeDoc) {
-      if (images[0].file == '') {
-        setImages(image);
-        console.log('nao tinha..');
-      }
-      console.log('caindo aqui');
-      return;
-    } else {
-      // if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
-      setImages((...prev) => {
-        [...prev, image];
-      });
-      // [...prev, image]);
+    // se nao existe:
+
+    // se ja existe:  (falta percorrer cada item de imagem... nao só a [0])
+    console.log('imagens2:', images);
+    if (images.find((x) => x.nomeDoc === image.nomeDoc)) {
+      setImages([{ image }]);
       console.log('ja tinha..');
     }
+    // if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
+    setImages((...prev) => {
+      [...prev, image];
+    });
+    // [...prev, image]);
+
     console.log('nada');
   }
 
@@ -111,7 +112,7 @@ export const UploadForm = () => {
       {documentos.map((data) => (
         <Toggle key={data.tipoDoc} data={data} pushImages={pushImages}>
           <Form
-            key={data.tipoDoc}
+            key={data.nomeDoc}
             data={data}
             pushImages={pushImages}
             handleSubmit={handleSubmit}
