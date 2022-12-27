@@ -65,17 +65,21 @@ export const UploadForm = () => {
 
     // se ja existe:  (falta percorrer cada item de imagem... nao só a [0])
     console.log('imagens2:', images);
-    if (images.find((x) => x.nomeDoc === image.nomeDoc)) {
-      setImages([{ image }]);
+    let jaTem = images.find((x) => x.nomeDoc === image.nomeDoc);
+    if (jaTem !== undefined) {
+      setImages((...prev) => {
+        [...prev, image];
+      });
       console.log('ja tinha..');
     }
-    // if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
-    setImages((...prev) => {
-      [...prev, image];
-    });
-    // [...prev, image]);
+    setImages([image]);
+    //   if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
+    //   setImages((...prev) => {
+    //     [...prev, image];
+    //   });
+    //   // [...prev, image]);
 
-    console.log('nada');
+    //   console.log('nada');
   }
 
   const handleSubmit = async () => {
