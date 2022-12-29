@@ -60,7 +60,7 @@ const documentos = [
 export const UploadForm = () => {
   const [images, setImages] = useState([]);
 
-  function pushImages(image) {
+  const pushImages = (image) => {
     // se nao existe:
 
     // se ja existe:  (falta percorrer cada item de imagem... nao só a [0])
@@ -80,7 +80,7 @@ export const UploadForm = () => {
     //   // [...prev, image]);
 
     //   console.log('nada');
-  }
+  };
 
   const handleSubmit = async () => {
     // if (!image) {
