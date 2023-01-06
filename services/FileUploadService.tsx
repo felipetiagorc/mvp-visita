@@ -6,7 +6,7 @@ const upload = (file, nomeDoc, pessoa, onUploadProgress) => {
   formData.append('nomeDoc', nomeDoc);
   formData.append('file', file);
 
-  return http.post('/upload', formData, {
+  return http.post('/visitante/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

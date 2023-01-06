@@ -1,7 +1,8 @@
 // import ImagePreviewer from './ImagePreviewer';
 import Form from './Form';
 import Toggle from './Toggle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import FileUploadService from './../../services/FileUploadService';
 
 // docs:
 const documentos = [
@@ -60,26 +61,37 @@ const documentos = [
 export const UploadForm = () => {
   const [images, setImages] = useState([]);
 
+  useEffect(() => {
+    console.log('effect:', images);
+  }, [images]);
+
   const pushImages = (image) => {
     // se nao existe:
 
     // se ja existe:  (falta percorrer cada item de imagem... nao só a [0])
     console.log('imagens2:', images);
-    let jaTem = images.find((x) => x.nomeDoc === image.nomeDoc);
-    if (jaTem !== undefined) {
-      setImages((...prev) => {
-        [...prev, image];
-      });
+    let jaTem = images.findIndex((x) => x.nomeDoc === image.nomeDoc);
+    console.log('jaTem: ', jaTem);
+    if (jaTem !== -1) {
+      //ja tem:
+      let items = [...images];
+      console.log('items: ', items);
+      let item = { ...items[jaTem] };
+      console.log('item: ', item);
+
+      item = image;
+      items[jaTem] = item;
+
+      setImages({ items });
+      // setImages((...prev) => {
+      //   [prev[jaTem], image];
+      // });
       console.log('ja tinha..');
     }
-    setImages([image]);
-    //   if (Object.values(images).indexOf({ nomeDoc: image.nomeDoc }) > -1) {
-    //   setImages((...prev) => {
-    //     [...prev, image];
-    //   });
-    //   // [...prev, image]);
 
-    //   console.log('nada');
+    setImages([image]);
+
+    console.log('nao tinha..');
   };
 
   const handleSubmit = async () => {

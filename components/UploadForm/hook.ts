@@ -7,7 +7,7 @@ export const useUploadForm = (url: string) => {
   const [progress, setProgress] = useState(0);
   // const [image, setImage] = useState(null);
 
-  const uploadForm = async (formData: FormData) => {
+  const postForm = async (formData: FormData) => {
     setIsLoading(true);
     await axios.post(url, formData, {
       headers: {
@@ -27,5 +27,5 @@ export const useUploadForm = (url: string) => {
     setProgress(0);
   };
 
-  return { uploadForm, isSuccess, isLoading, progress };
+  return { postForm, isSuccess, isLoading, progress };
 };
