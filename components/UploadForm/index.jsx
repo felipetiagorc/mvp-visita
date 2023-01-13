@@ -68,6 +68,15 @@ export const UploadForm = () => {
   const updatePreview = (file, id, cb) => {
     if (file) {
       const path = URL.createObjectURL(file);
+
+      // let id = id
+      // let fileReader = new FileReader();
+      // let file = event.target.files[0];
+      // fileReader.onload = () => {
+      //   setFiles([...files, { file_id: id, uploaded_file: fileReader.result }]);
+      //   fileReader.readAsDataURL(file);
+      // };
+
       const doc = {
         id: id,
         nomeDoc: file.nomeDoc,
