@@ -26,7 +26,7 @@ import FilePreview from './FilePreview';
 function Form({ data: { nomeDoc }, pushImages }) {
   const { data: session } = useSession();
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
 
   const updatePreview = (image, cb) => {
     if (image) {
@@ -37,7 +37,6 @@ function Form({ data: { nomeDoc }, pushImages }) {
         path: path,
       };
       cb(data);
-      pushImages(data);
       // pushImages(data.path);   ok
     }
     return;
@@ -49,12 +48,23 @@ function Form({ data: { nomeDoc }, pushImages }) {
     console.log('image:');
   };
 
+  // aqui pega a imagem pelo input e seta o state 'image' 2
+  // const handleFileChange = ({ target }) => {
+  //   const { name, value, files } = target;
+  //   if (files) {
+  //     setImage;
+  //   }
+  //   updatePreview(target.files[0], setImage);
+  //   console.log('image:');
+  // };
+
   // form tem a funcao de maniular e passa pro input
   // estado 'image'
   return (
     <>
       <section className="flex border-1 ">
         <div className="flex flex-row flex-wrap justify-center items-center">
+          <div>Image: {image && JSON.stringify(image)}</div>
           {/* esse é o ImagePreview verdadeiro */}
           {/* <div className="flex flex-col justify-center items-center flex-nowrap align-middle my-6 h-56 w-40 border-2 border-blue-200 border-dashed">
             {image ? (
@@ -143,9 +153,9 @@ function Form({ data: { nomeDoc }, pushImages }) {
           <div className="divider"></div>
 
           <div className="flex gap-16 flex-wrap">
-            <button
+            {/* <button
               className="bg-green-700 hover:bg-green-600 text-white font-semibold antialiased radio-success py-2 px-4 rounded cursor-pointer"
-              //   onClick={handleSubmitUpload}
+                onClick={handleSubmitUpload}
             >
               Confirmar
             </button>
@@ -155,7 +165,7 @@ function Form({ data: { nomeDoc }, pushImages }) {
               onClick={() => {}}
             >
               Cancelar
-            </button>
+            </button> */}
           </div>
         </div>
       </section>

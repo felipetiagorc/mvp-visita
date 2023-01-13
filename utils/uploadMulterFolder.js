@@ -29,7 +29,7 @@ const uploadMulterFolder = multer({
   limits: {
     fieldNameSize: 60,
     fieldSize: 2048,
-    files: 1,
+    files: 30,
     fileSize: 2 * 1024 * 1024,
   },
 
