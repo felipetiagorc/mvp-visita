@@ -35,10 +35,9 @@ function FileInput({
         <input
           id={id}
           name={nomeDoc}
+          type="file"
+          accept=".jpg, .png, .pdf"
           style={{ display: 'none' }}
-          accept={accept}
-          capture={capture}
-          type={type}
           onChange={handleFileChange}
           {...props}
         />

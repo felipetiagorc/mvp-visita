@@ -26,14 +26,14 @@ import FilePreview from './FilePreview';
 function Form({ data: { nomeDoc }, pushImages }) {
   const { data: session } = useSession();
 
-  const [image, setImage] = useState([]);
+  const [imgPreview, setImgPreview] = useState([]);
 
-  const updatePreview = (image, cb) => {
-    if (image) {
-      const path = URL.createObjectURL(image);
+  const updatePreview = (imgPreview, cb) => {
+    if (imgPreview) {
+      const path = URL.createObjectURL(imgPreview);
       const data = {
         nomeDoc: nomeDoc,
-        file: image,
+        file: imgPreview,
         path: path,
       };
       cb(data);
@@ -44,8 +44,8 @@ function Form({ data: { nomeDoc }, pushImages }) {
 
   // aqui pega a imagem pelo input e seta o state 'image'
   const handleFileChange = (e) => {
-    updatePreview(e.target.files[0], setImage);
-    console.log('image:');
+    updatePreview(e.target.files[0], setImgPreview);
+    console.log('imgPreview:');
   };
 
   // aqui pega a imagem pelo input e seta o state 'image' 2
@@ -64,7 +64,7 @@ function Form({ data: { nomeDoc }, pushImages }) {
     <>
       <section className="flex border-1 ">
         <div className="flex flex-row flex-wrap justify-center items-center">
-          <div>Image: {image && JSON.stringify(image)}</div>
+          <div>imgPreview: {imgPreview && JSON.stringify(imgPreview)}</div>
           {/* esse é o ImagePreview verdadeiro */}
           {/* <div className="flex flex-col justify-center items-center flex-nowrap align-middle my-6 h-56 w-40 border-2 border-blue-200 border-dashed">
             {image ? (
@@ -83,9 +83,9 @@ function Form({ data: { nomeDoc }, pushImages }) {
           {/* esse é o ImagePreview verdadeiro */}
 
           <div className="my-2">
-            {image ? (
+            {imgPreview ? (
               <FilePreview
-                fileDataURL={image.path}
+                fileDataURL={imgPreview.path}
                 labelText={nomeDoc}
                 alt={nomeDoc}
               />
