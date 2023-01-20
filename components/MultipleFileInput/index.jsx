@@ -12,6 +12,11 @@ const documentos = [
   { id: 3, tipoDoc: 'certidao', nomeDoc: 'certidao', label: 'Certidão' },
 ];
 
+// só o Handle Submit deve ficar aqui ...
+// as funcoes q manipulam devem ficar proxima do input . o estado também.. (pra nao duplicar)
+
+// volta o problema de dar push nas imagens.. ?
+
 const MultipleFileInput = () => {
   const [files, setFiles] = useState([]);
   const [enabled, setEnabled] = useState(false);
@@ -35,39 +40,32 @@ const MultipleFileInput = () => {
     );
   }
 
-  // useEffect(() => {
-  //   if (imgPreview.length !== 0) {
-  //     setEnabled(false);
-  //   } else {
-  //     setEnabled(true);
-  //   }
-  // }, [files]);
+  useEffect(() => {}, [imgPreview]);
 
-  const updatePreview = (imgPreview, cb) => {
-    if (imgPreview) {
-      const path = URL.createObjectURL(imgPreview);
-      const data = {
-        // nomeDoc: nomeDoc,
-        file: imgPreview,
-        path: path,
-      };
-      cb(data);
-      // pushImages(data.path);   ok
-    }
+  const updatePreview = (file, id) => {
+    // if (imgPreview) {
+    const path = URL.createObjectURL(imgPreview);
+    const data = {
+      // nomeDoc: nomeDoc,
+      file: imgPreview,
+      path: path,
+    };
+    cb(data);
+    // pushImages(data.path);   ok
+    // }
     return;
   };
 
-  function handleFileChange(event) {
+  function handleFileChange(event, index) {
     console.log('chamou');
     event.preventDefault();
-    // Get the file Id
+
+    // Obtem dados do input
     let id = event.target.id;
     let nomeDoc = event.target.name;
-
-    // Create an instance of FileReader API
-    let file_reader = new FileReader();
-    // Get the actual file itself
     let file = event.target.files[0];
+
+    let file_reader = new FileReader();
     file_reader.onload = () => {
       // After uploading the file
       // appending the file to our state array
@@ -76,11 +74,21 @@ const MultipleFileInput = () => {
         ...files,
         { id: id, nomeDoc: nomeDoc, path: file_reader.result },
       ]);
+
+      // setImgPreview({ id: id, path: file_reader.result });
     };
 
+    let newPreview = [...imgPreview];
     // reading the actual uploaded file
-    file_reader.readAsDataURL(file);
-    updatePreview(file, setImgPreview);
+    const imgSrc = file_reader.readAsDataURL(file);
+    if (newPreview[index] === null) {
+      newPreview.splice(index, 0, imgSrc);
+    } else {
+      newPreview[index] = imgSrc;
+    }
+    setImgPreview(newPreview);
+
+    // updatePreview(file, setImgPreview);
   }
 
   // handle submit button for form
@@ -132,8 +140,9 @@ const MultipleFileInput = () => {
             <>
               {imgPreview ? (
                 <FilePreview
-                  fileDataURL={files.path}
-                  labelText={files.nomeDoc}
+                  key={doc.id}
+                  fileDataURL={imgPreview.path}
+                  labelText={imgPreview.nomeDoc}
                 />
               ) : (
                 <></>
@@ -160,7 +169,7 @@ const MultipleFileInput = () => {
                     Escolher arquivo
                   </p>
                 }
-                onChange={handleFileChange}
+                onChange={(e) => handleFileChange(e)}
                 capture={'user'}
               />
             </>
