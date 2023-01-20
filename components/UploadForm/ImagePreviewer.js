@@ -5,25 +5,33 @@ import FileInput from './FileInput';
 import { useSession } from 'next-auth/react';
 import ProgressBar from './ProgressBar';
 
-const ImagePreviewer = ({ data: { nomeDoc } }) => {
-  // const [image, setImage] = useState(null);
+const documentos = [
+  { id: 1, tipoDoc: 'rg', nomeDoc: 'rg', label: 'RG' },
+  { id: 2, tipoDoc: 'cpf', nomeDoc: 'cpf', label: 'CPF' },
+  { id: 3, tipoDoc: 'certidao', nomeDoc: 'certidao', label: 'Certidão' },
+];
 
-  // const updatePreview = (image, cb) => {
-  //   if (image) {
-  //     const path = URL.createObjectURL(image);
-  //     const data = {
-  //       file: image,
-  //       path: path,
-  //     };
-  //     cb(data);
-  //   }
-  //   return;
-  // };
+const ImagePreviewer = ({ data: { nomeDoc } }) => {
+  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState('');
+  const [message, setMessage] = useState('');
+
+  const updatePreview = (image, cb) => {
+    if (image) {
+      const path = URL.createObjectURL(image);
+      const data = {
+        file: image,
+        path: path,
+      };
+      cb(data);
+    }
+    return;
+  };
 
   // // aqui pega a imagem pelo input e seta o state 'image'
-  // const handleFileChange = (e) => {
-  //   updatePreview(e.target.files[0], setImage);
-  // };
+  const handleFileChange = (e) => {
+    updatePreview(e.target.files[0], setImage);
+  };
 
   // aqui faz o upload, atraves do botao..
   const handleSubmitUpload = async (e) => {
@@ -34,26 +42,25 @@ const ImagePreviewer = ({ data: { nomeDoc } }) => {
     }
 
     try {
-      // let startAt = Date.now(); // para rastrear o tempo estimado
-      // let formData = new FormData();
-      // formData.append('email', session.user.email);
-      // formData.append('nomeDoc', tipoDoc);
-      // formData.append('file', image.file);
+      let startAt = Date.now(); // para rastrear o tempo estimado
+      let formData = new FormData();
+      formData.append('email', session.user.email);
+      formData.append('nomeDoc', tipoDoc);
+      formData.append('file', image.file);
 
-      // const options = {
-      //   headers: { 'Content-Type': 'multipart/form-data' },
-      //   onUploadProgress: (progressEvent) => {
-      //     const { loaded, total } = progressEvent;
+      const options = {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
 
-      //     const percentage = (loaded * 100) / total;
-      //     setProgress(+percentage.toFixed(2));
+          const percentage = (loaded * 100) / total;
+          setProgress(+percentage.toFixed(2));
 
-      //     const timeElapsed = Date.now() - startAt;
-      //     const uploadSpeed = loaded / timeElapsed;
-      //     const duration = (total - loaded) / uploadSpeed;
-      //     setRemaining(duration);
-      //   },
-      // };
+          const timeElapsed = Date.now() - startAt;
+          const uploadSpeed = loaded / timeElapsed;
+          const duration = (total - loaded) / uploadSpeed;
+        },
+      };
 
       const data = await axios.post('/api/visitante/upload', formData, options);
 

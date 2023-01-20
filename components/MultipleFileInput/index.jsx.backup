@@ -78,16 +78,6 @@ const MultipleFileInput = () => {
       // setImgPreview({ id: id, path: file_reader.result });
     };
 
-    let newPreview = [...imgPreview];
-    // reading the actual uploaded file
-    const imgSrc = file_reader.readAsDataURL(file);
-    if (newPreview[index] === null) {
-      newPreview.splice(index, 0, imgSrc);
-    } else {
-      newPreview[index] = imgSrc;
-    }
-    setImgPreview(newPreview);
-
     // updatePreview(file, setImgPreview);
   }
 
