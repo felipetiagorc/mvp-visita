@@ -1,8 +1,26 @@
 {
+  "env": {
+    "jest": true
+  },
+  "root": true,
   //extendi as config .. antes era so 'web-vitals':
   "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
   //inclui esse globals:
   "globals": {
     "React": "readonly"
-  }
+  },
+
+  // coloquei pra testes:
+  // copiei https://github.com/vercel/next.js/blob/canary/examples/with-jest/.eslintrc.json
+  "plugins": ["testing-library"],
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }

@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/upload/dropzoneFacil.js",
+    "pages/upload/dropzone00Facil.js",
     "pages/index.js",
     "components/layout.js",
     "components/UploadForm/index.jsx",

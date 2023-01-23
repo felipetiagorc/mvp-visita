@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // import FileUploadService from './Services/FileUploadService';
 
-export const MultipleFileInput = () => {
+const MultipleFileInput = () => {
   const [currentFile, setCurrentFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -14,9 +14,23 @@ export const MultipleFileInput = () => {
   //     });
   //   };
 
+  const updatePreview = (image, cb) => {
+    if (image) {
+      const path = URL.createObjectURL(image);
+      const data = {
+        file: image,
+        path: path,
+      };
+      cb(data);
+    }
+    return;
+  };
+
+  // // aqui pega a imagem pelo input e seta o state 'image'
+
   const selectFile = (event) => {
     setCurrentFile(event.target.files[0]);
-    setPreviewImage(event.target.files[0]);
+    updatePreview(event.target.files[0], setPreviewImage);
     setProgress(0);
     setMessage('');
   };
@@ -61,7 +75,7 @@ export const MultipleFileInput = () => {
         </div>
       </div>
 
-      {/* {currentFile && (
+      {currentFile && (
         <div className="progress my-3">
           <div
             className="progress-bar progress-bar-info progress-bar-striped"
@@ -74,11 +88,11 @@ export const MultipleFileInput = () => {
             {progress}%
           </div>
         </div>
-      )} */}
+      )}
 
       {previewImage && (
         <div>
-          <img className="preview" src={previewImage} alt="" />
+          <img className="preview" src={previewImage.path} alt="" />
         </div>
       )}
 
@@ -102,3 +116,4 @@ export const MultipleFileInput = () => {
     </div>
   );
 };
+export default MultipleFileInput;
